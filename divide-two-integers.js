@@ -1,15 +1,13 @@
 /**
- * @param {number} dividend
- * @param {number} divisor
+ * @param {string} haystack
+ * @param {string} needle
  * @return {number}
  */
-
- // 版本1超出时间限制
 var divide = function(dividend, divisor) {
     if (dividend === 0 || Math.abs(dividend) < Math.abs(divisor)) {
         return 0;
     }
-    let result = 0;
+    
     let isMinus = false;
     let sum = dividend + divisor;
     if((sum > dividend && sum <divisor) || (sum > divisor && sum < dividend)) {
@@ -17,8 +15,23 @@ var divide = function(dividend, divisor) {
     } 
     dividend = Math.abs(dividend);
     divisor = Math.abs(divisor);
-    while(dividend >= divisor) {
-        dividend -= divisor;
+    let result = 0,
+        minDifference = dividend;
+    function getDivide(tempResult, tempDivisor) {
+        tempDivisor += tempDivisor;
+        if(tempDivisor <= dividend) {
+            tempResult += tempResult;
+            getDivide(tempResult, tempDivisor);
+            if(minDifference - tempDivisor >= 0) {
+                minDifference = minDifference - tempDivisor;
+                console.log(tempResult, minDifference)
+                result += tempResult;
+            }
+        }
+        return;
+    }
+    getDivide(1, divisor);
+    if(minDifference >= divisor) {
         result += 1;
     }
     if(result >= 2**31) {
@@ -33,57 +46,5 @@ var divide = function(dividend, divisor) {
     } else {
         return result;
     }
-    
 };
-
-var divide1 = function(dividend, divisor) {
-    if (dividend === 0 || Math.abs(dividend) < Math.abs(divisor)) {
-        return 0;
-    }
-    let result = 1;
-    let isMinus = false;
-    let sum = dividend + divisor;
-    if((sum > dividend && sum <divisor) || (sum > divisor && sum < dividend)) {
-        isMinus = true;
-    } 
-    dividend = Math.abs(dividend);
-    divisor = Math.abs(divisor);
-    function getResult(tempResult, tempDivisor) {
-        tempDivisor += tempDivisor;
-        if(tempDivisor <= dividend) {
-            tempResult += tempResult;
-            getResult(tempResult, tempDivisor);
-            result = Math.max(result, tempResult)
-            if(dividend-tempDivisor > 0 && dividend - tempDivisor < divisor) {
-                console.log(result, tempResult)
-                result += tempResult;
-                return;
-            }
-        }
-        return;
-    }
-    getResult(result, divisor);
-    console.log(result);
-}
-divide1(61, 3)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+divide(7, -3)
