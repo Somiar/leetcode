@@ -31,3 +31,21 @@ var palindromePairs = function(words) {
 	console.log(result);
 };
 palindromePairs(["bat","tab","cat"])
+
+var majorityElement = function(nums) {
+	let result = 0;
+	let numsMap = {};
+	for(let i = 0; i < nums.length; i++) {
+		if(!numsMap[nums[i]]) {
+			numsMap[nums[i]] = 1;
+		} else {
+			console.log()
+			numsMap[nums[i]]  += 1;
+			if(numsMap[nums[i]]  > nums.length / 2) {
+				result = nums[i];
+			}
+		}
+	}
+	console.log(result);
+}
+majorityElement([3,2,3])
