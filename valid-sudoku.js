@@ -18,17 +18,14 @@ var isValidSudoku = function(board) {
 			}
 			cols[j][board[i][j]] += 1;
 			if(board[i][j] !== '.' && cols[j][board[i][j]] > 1) {
-				console.log(false);
 				return false;
 			}
 			grids[parseInt(i/3)*3+parseInt(j/3)][board[i][j]] += 1;
 			if(board[i][j] !== '.' && grids[parseInt(i/3)*3+parseInt(j/3)][board[i][j]] > 1) {
-				console.log(false);
 				return false;
 			}
 		}
 	}
-	console.log(true);
 	return true
 };
 
