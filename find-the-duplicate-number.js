@@ -18,6 +18,8 @@ var findDuplicate = function(nums) {
 };
 
 // 解法二
+// 利用Floyd判环算法
+// 耗时76ms
 var findDuplicate1 = function(nums) {
 	let fast = 0,
 		slow = 0;
@@ -25,15 +27,13 @@ var findDuplicate1 = function(nums) {
 		slow = nums[slow];
 		fast = nums[nums[fast]];
 		if(slow === fast) {
-			console.log(fast);
 			fast = 0;
 			while(nums[slow] !== nums[fast]) {
 				fast = nums[fast];
 				slow = nums[slow];
 			}
-			console.log(slow, fast);
-			return
+			return nums[slow];
 		}
 	}
 }
-findDuplicate1([3,1,3,4,2])
+findDuplicate1([2,5,9,6,9,3,8,9,7,1])
