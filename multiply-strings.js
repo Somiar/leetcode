@@ -5,6 +5,9 @@
  */
  // 43.字符串相乘
 var multiply = function(num1, num2) {
+	if(num1 === '0' || num2 === '0') {
+		return '0'
+	}
 	let nums = new Array(num1.length+num2.length).fill(0);
 	for(let i = num1.length - 1; i >= 0; i--) {
 		let temp = 0;
@@ -16,7 +19,6 @@ var multiply = function(num1, num2) {
 			nums[i + j] += temp;
 		}
 	}
-	console.log(nums);
 	let result = nums.join('');
 	result = nums[0] === 0 ? result.slice(1) : result;
 	console.log(result);
